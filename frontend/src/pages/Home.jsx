@@ -21,28 +21,32 @@ function Home() {
     const deleteTweet = (id) => {
         api.delete(`/tweet/delete/${id}/`)
            .then((res) => {
-            if (res.status === 204) alert('Deleted!')
+            if (res.status === 204) getTweets()
             else ('Failed to delete')
            })
            .catch((err) => alert('error deleting tweet : ' + err))
-        getTweets()
     };
 
     const createTweet = (e) => {
         e.preventDefault()
         api.post('/tweet/', { title, content })
            .then((res) => {
-            if (res.status === 201) alert('Created!')
+            if (res.status === 201) getTweets()
             else ('Failed to create')
            })
            .catch((err) => alert('error creating tweet : ' + err))
-        getTweets()
+    };
+
+    const handleLogout = () => {
+        localStorage.clear()
+        window.location.reload(false);
     };
 
     return (
+        <div className="background-image">
         <div>
-        <div>
-            <h2>Tweet something!</h2>
+            <h2 style={{textAlign : 'center'}}>Tweet something!</h2>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
             <form onSubmit={createTweet}>
                 <h3>What is on your mind</h3>
                 <label htmlFor='title'> </label>
@@ -72,9 +76,9 @@ function Home() {
         </div>
         <div>
             <h2>Your Tweets</h2>
-            {tweets.map((tweet) => (
+            <div style={{display : 'flex', gap : '20px'}}>{tweets.map((tweet) => (
                 <Tweet tweet={tweet} onDelete={deleteTweet} key={tweet.id}/>
-            ))}
+            ))}</div>
         </div>
         </div>);
 }

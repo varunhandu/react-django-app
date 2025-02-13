@@ -10,16 +10,16 @@
   }
   
   .tweet-content {
-    color: #666;
+    color: #000;
   }
   
   .tweet-date {
-    color: #999;
+    color: #fff;
     font-size: 0.8rem;
   }
   
   .delete-btn {
-    background-color: #f44336; /* Red */
+    background-color: #ce631c; /* Red */
     color: white;
     border: none;
     padding: 10px 20px;

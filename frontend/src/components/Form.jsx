@@ -23,13 +23,13 @@ function Form({route, method}) {
                 console.log('access : ' + res.data.access)
                 console.log('refresh : ' + res.data.refresh)
                 navigate('/')
-                console.log('access : ' + ACCESS_TOKEN)
-                console.log('refresh : ' + REFRESH_TOKEN)
             } else {
                 navigate('/login')
             }
         } catch (error) {
-            alert('caught an error : '+error)
+            if (error.response.status === 401) {
+                alert('Wrong password or username')
+            } else alert('caught an error : '+error)
         } finally {
             setLoading(false)
         }
